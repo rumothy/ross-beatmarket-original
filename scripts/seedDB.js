@@ -19,13 +19,13 @@ const beatSeed = [
 const licenseSeed = [
   { name: "Basic", text: "1000 streams", price: 29.99 },
   { name: "Premium", text: "10000 streams", price: 59.99 },
-  { name: "Exclusive", text: "100000 streams", price: 499.99 }
-  // { name: "Cool", text: "999 streams", price: 39.99 },
-  // { name: "Super", text: "9999 streams", price: 69.99 },
-  // { name: "Duper", text: "99999 streams", price: 399.99 },
-  // { name: "Basic", text: "2000 streams", price: 27.99 },
-  // { name: "Premium", text: "20000 streams", price: 57.99 },
-  // { name: "Exclusive", text: "200000 streams", price: 477.99 }
+  { name: "Exclusive", text: "100000 streams", price: 499.99 },
+  { name: "Cool", text: "999 streams", price: 39.99 },
+  { name: "Super", text: "9999 streams", price: 69.99 },
+  { name: "Duper", text: "99999 streams", price: 399.99 },
+  { name: "Basic", text: "2000 streams", price: 27.99 },
+  { name: "Premium", text: "20000 streams", price: 57.99 },
+  { name: "Exclusive", text: "200000 streams", price: 477.99 }
 ];
 
 const producerSeed = [
