@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const AWS = require("aws-sdk");
 const fs = require("fs");
-const keys = require("./constants/keys");
+const keys = require("./private/keys");
 
 const mongoose = require("mongoose");
 // const routes = require("./routes");
@@ -57,7 +57,7 @@ AWS.config.update({
 const s3 = new AWS.S3();
 
 app.post("/api/files", upload.single("file"), function(req, res) {
-  uploadFile(req.file.path, req.file.filename, res);
+  uploadFile(req.file.path, req.file.filename, res, req.headers.referer);
 });
 
 app.get("/api/files/:filename", (req, res) => {
@@ -99,7 +99,7 @@ app.get("/api/audio/:filename", (req, res) => {
     });
 });
 
-function uploadFile(source, filename, res) {
+function uploadFile(source, filename, res, referer) {
   console.log("preparing to upload...");
   fs.readFile(source, function(err, filedata) {
     if (!err) {
@@ -114,14 +114,19 @@ function uploadFile(source, filename, res) {
           return res.send({ success: false });
         } else {
           fs.unlink(source, () => {});
-          console.log("Successfully uploaded the file");
-          return res.send({ success: true, filename: filename });
+          return res.redirect("/producerAdmin/" + getProducerId(referer));
         }
       });
     } else {
       console.log({ err: err });
     }
   });
+}
+
+function getProducerId(referer) {
+  // const referer = "http://localhost:3000/producerAdmin/5e66ad42768dd5009dd161b1";
+  const refererArray = referer.split("/");
+  return refererArray.pop();
 }
 
 function retrieveFile(filename, res) {
