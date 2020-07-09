@@ -49,8 +49,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 AWS.config.update({
-  accessKeyId: keys.iam_access_id,
-  secretAccessKey: keys.iam_secret,
+  accessKeyId: process.env.S3_KEY || keys.iam_access_id,
+  secretAccessKey: process.env.S3_SECRET || keys.iam_secret,
   region: keys.bucket_region
 });
 
